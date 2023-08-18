@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThonthusCharts</title>
+    <link rel="icon" href="img\logoheader.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/9a8a2c6b04.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.2/chart.min.js" integrity="sha512-csUso5vWY3PpIJkxLWFbPI7KkjXFhKXpUaAUp1ZLyNhxVWdQacEPH9e7Iw6Rco4es1uQNnlxdCCFkSnJ/f1ZzA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    
+
+
+
+</head>
+<body>
+    <div class="header">
+        <div class="leftgrid">
+            <div class="lefttext">
+                <h1 class="hdh1">Thonthus Prangpetch</h1>
+                <p class="hdp">Portfolio</p>
+            </div>
+        </div>
+        <div class="rightgrid">
+            <div class="headerimg">
+                <a class="hdimg" href="https://www.facebook.com/thonthus.prangpech" target="_blank">
+                    <img src="img\logoheader.png" alt="">
+                </a>
+            </div>
+        </div>    
+    </div>
+    <div class="gridarea">
+        <div class="gridzone">
+            <div class="grid-container">
+                <div class="grid-item">
+                    <p>รายการใช้จ่ายต่อเดือน</p>
+                    <div style="text-align: center;">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                      
+                    
+                      <script>
+                        var ctx = document.getElementById('pieChart').getContext('2d');
+                        var data = {
+                          labels: ['ออม', 'ค่าอาหาร', 'ค่าพี่พัก', 'ค่าเดินทาง', 'ค่าโทรศัพท์และค่าบริการรายเดือน', 'อื่น ๆ'],
+                          datasets: [{
+                            data: [10, 40, 25, 5, 10, 10], // Values for each segment
+                            backgroundColor: [
+                              'rgb(235, 139, 160)',  
+                              'rgb(109, 185, 236)',   
+                              'rgb(235, 206, 136)', 
+                              'rgb(124, 211, 212)', 
+                              'rgb(171, 141, 236)',
+                              'rgb(26, 202, 120)'    
+                            ]
+                          }]
+                        };
+                        var options = {
+                          responsive: true,
+                          maintainAspectRatio: false,
+                          legend: {
+                            display: false 
+                          },
+                        };
+                    
+                        
+                        data.total = data.datasets[0].data.reduce(function(total, currentValue) {
+                          return total + currentValue;
+                        }, 0);
+                    
+                        var myPieChart = new Chart(ctx, {
+                          type: 'pie',
+                          data: data,
+                          options: options
+                        });
+                      </script>
+                    
+                    <p>(หน่วยเป็น %)</p>
+                
+
+                </div>
+                <div class="grid-item">
+                    <canvas id="myChart"></canvas>
+                    <script>
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                          type: 'bar',
+                          data: {
+                            labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                            datasets: [{
+                              label: 'เวลาตื่นนอนในแต่ละวัน',
+                              data: [14.30, 8.15, 7.15, 12.30, 8.15, 7.00, 14.00],
+                              backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(255, 206, 86, 0.5)',
+                                'rgba(75, 192, 192, 0.5)',
+                                'rgba(153, 102, 255, 0.5)',
+                                'rgba(255, 159, 64, 0.5)',
+                                'rgba(75, 192, 192, 0.5)'
+                              ],
+                              borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(75, 192, 192, 1)'
+                              ],
+                              borderWidth: 1
+                            }]
+                          },
+                          options: {
+                            scales: {
+                              x: {
+                                beginAtZero: true,
+                                max: 24, 
+                                title: {
+                                  display: true,
+                                  text: 'วัน' 
+                                }
+                              },
+                              y: {
+                                title: {
+                                  display: true,
+                                  text: 'เวลา' 
+                                },
+                                ticks: {
+                                  stepSize: 1, 
+                                  callback: function(value, index, values) {
+                                    return value.toFixed(2); 
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        });
+                      </script>
+                    
+
+                </div>
+                <div class="grid-item">
+                    <p>การใช้เวลาในชีวิตประจำวัน</p>
+                    <div class="psuedod">
+                        <canvas id="doughnutChart"></canvas>
+
+                        <script>
+                            var ctx = document.getElementById('doughnutChart').getContext('2d');
+                            var data = {
+                            labels: ['นอนหลับ', 'ทานอาหาร', 'เรียน - อ่านหนังสือ', 'พักผ่อน'],
+                            datasets: [{
+                                data: [8, 3, 10, 3], 
+                                backgroundColor: [
+                                'rgba(255, 99, 132, 0.7)', 
+                                'rgba(54, 162, 235, 0.7)', 
+                                'rgba(75, 192, 192, 0.7)', 
+                                'rgba(255, 206, 86, 0.7)' 
+                                ]
+                            }]
+                            };
+                            var options = {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            title: {
+                                display: true,
+                                text: 'เวลาในชีวิตประจำวัน', 
+                                fontSize: 16
+                            }
+                            };
+                            var myDoughnutChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: data,
+                            options: options
+                            });
+                        </script>
+                    </div>
+                    <p>หน่วยเป็น ชั่วโมง</p>
+                </div>
+
+                <div class="grid-item">
+                    <p>เวลาออกกำลังกายเฉลี่ยในสัปดาห์</p>
+                    <div class="pseudod">
+                        <canvas id="polarChart"></canvas>
+                        <script>
+                            var ctx = document.getElementById('polarChart').getContext('2d');
+                            var data = {
+                            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                            datasets: [{
+                                data: [90, 180, 80, 120, 60, 240], 
+                                backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)', 
+                                'rgba(54, 162, 235, 0.5)', 
+                                'rgba(255, 206, 86, 0.5)', 
+                                'rgba(75, 192, 192, 0.5)', 
+                                'rgba(153, 102, 255, 0.5)', 
+                                'rgba(255, 159, 64, 0.5)'  
+                                ]
+                            }]
+                            };
+                            var options = {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            title: {
+                                display: true,
+                                text: 'เวลาออกกำลังกายเฉลี่ยในสัปดาห์', 
+                                fontSize: 16
+                            }
+                            };
+                            var myPolarChart = new Chart(ctx, {
+                            type: 'polarArea',
+                            data: data,
+                            options: options
+                            });
+                        </script>
+                    </div>
+                    <p>(หน่วยเป็น นาที)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ิ
+    <footer>
+        @copyright Thonthus Prangpetch 6504101343
+    </footer>
+
+    
+</body>
+</html>
